@@ -2,17 +2,16 @@
 import pandas as pd
 import json
 import falcon
+from db.conn import engine
 
-df = pd.read_csv('input/finalapi.csv').fillna('')
 
 class DetailedInfoResource(object):
     def on_get(self, req, resp, val):
         param = req.url.split('/')[-2]
 
-        try:
-            doc = df[(df[param] == val)][['AGENCY_ID', 'MONTHS', param, 'STATE_ABBR']].to_dict('list')
-        except:
-            doc = df[(df[param] == float(val))][['AGENCY_ID', 'MONTHS', param, 'STATE_ABBR']].to_dict('list')
+        doc = pd.read_sql(
+            'select AGENCY_ID, MONTHS, {0}, STATE_ABBR from detailed_table where {1} = {2}' .format(param, param, val), engine
+        ).to_dict('list')
 
         # create json representation
         resp.body = json.dumps(doc, ensure_ascii=False)
@@ -25,13 +24,12 @@ class ReportResource(object):
         param1 = req.url.split('/')[4]
         param2 = req.url.split('/')[6]
 
-        try:
-            doc = df[(df[param1] == start_year) & (df[param2] == end_year)][['AGENCY_ID', 'PRIMARY_AGENCY_ID', 'PROD_ABBR', 'PROD_LINE', 'NB_WRTN_PREM_AMT', 'WRTN_PREM_AMT', 'PREV_WRTN_PREM_AMT', 'PRD_ERND_PREM_AMT']].to_dict('list')
-        except:
-            doc = df[(df[param1] == float(start_year)) & (df[param2] == float(end_year))][['AGENCY_ID', 'PRIMARY_AGENCY_ID', 'PROD_ABBR', 'PROD_LINE', 'NB_WRTN_PREM_AMT', 'WRTN_PREM_AMT', 'PREV_WRTN_PREM_AMT', 'PRD_ERND_PREM_AMT']].to_dict('list')
-
+        doc = pd.read_sql(
+            'select AGENCY_ID, PRIMARY_AGENCY_ID, PROD_ABBR, PROD_LINE, NB_WRTN_PREM_AMT, WRTN_PREM_AMT, PREV_WRTN_PREM_AMT, PRD_ERND_PREM_AMT from detailed_table where {0} = {1} and {2} = {3}' .format(param1, start_year, param2, end_year), engine
+        ).to_dict('list')
+        
         # create json representation
-        resp.body = json.dumps(doc, ensure_ascii=False)
+        resp.body = json.dumps(doc, ensure_ascii = False)
 
         # not required as default status returned by framework in 200
         resp.status = falcon.HTTP_200

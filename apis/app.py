@@ -39,4 +39,4 @@ api.add_route('/report/COMMISIONS_START_YEAR/{start_year}/COMMISIONS_END_YEAR/{e
 api.add_route('/report/CL_START_YEAR/{start_year}/CL_END_YEAR/{end_year}', report_routes)
 
 # ACTIVITY
-api.add_route('/report/ACTIVITY_NOTES_START_YEAR/{start_year}/ACTIVITY_NOTES_END_YEAR/{end_year}', report_routes)   
+api.add_route('/report/ACTIVITY_NOTES_START_YEAR/{start_year}/ACTIVITY_NOTES_END_YEAR/{end_year}', report_routes)
