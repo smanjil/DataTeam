@@ -3,7 +3,7 @@ import pandas as pd
 import json
 import falcon
 
-df = pd.read_csv('apis/finalapi.csv').fillna('')
+df = pd.read_csv('input/finalapi.csv').fillna('')
 
 class DetailedInfoResource(object):
     def on_get(self, req, resp, val):
