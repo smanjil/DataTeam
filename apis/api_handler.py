@@ -10,7 +10,7 @@ class DetailedInfoResource(object):
         param = req.url.split('/')[-2]
 
         doc = pd.read_sql(
-            'select AGENCY_ID, MONTHS, {0}, STATE_ABBR from detailed_table where {1} = {2}' .format(param, param, val), engine
+            'select AGENCY_ID, MONTHS, PL_START_YEAR, STATE_ABBR from detailed_table where {0} = {1}' .format(param, val), engine
         ).to_dict('list')
 
         # create json representation
