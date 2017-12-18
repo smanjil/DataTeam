@@ -4,6 +4,7 @@ from db.conn import engine
 
 
 def save_detailed_info(final_api_df):
+    final_api_df = final_api_df[final_api_df['AGENCY_ID'] == 3]
     final_api_df.to_sql('detailed_table', engine, if_exists = 'replace', index = False)
 
 
