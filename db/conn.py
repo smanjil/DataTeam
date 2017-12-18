@@ -1,9 +1,9 @@
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData
 
-# engine = create_engine('postgresql://postgres:12345@localhost/datateamdb')
+#engine = create_engine('postgresql://postgres:12345@localhost/datateamdb')
 
 # for heroku
 engine = create_engine(
-    'postgres://xagwigpblkwwea:92ecc654ddcd68cb81210e9e17bb6a8b814e44fc76218e620508f2d10dee5dce@ec2-54-235-244-185.compute-1.amazonaws.com:5432/ddkpiqcv67e0au'
+    'postgres://gngassqimzfoym:3efdfd1d8962443e14f90f59cc8078194ca3a665dedb2bec6013483c08e8f566@ec2-54-235-244-185.compute-1.amazonaws.com:5432/dfomhnli2c3cc5'
 )
