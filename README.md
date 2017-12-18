@@ -38,3 +38,11 @@ have used pytest module to write some unit tests.
   - to run, from project folder just type "pytest" and hit enter, the test should pass.
   - checked the keys returned from the queries and in actual df, and the status code
   
+
+auth for apis.
+  - included a {username} token to be passed in through route.
+  - check {username} in a list of authorized users, if present process request, else raise exception.
+  - rotue example:
+    - http localhost:8000/testuser1/detail/AGENCY_ID/3  (valid)
+    - http localhost:8000/detail/AGENCY_ID/3  (invalid)
+

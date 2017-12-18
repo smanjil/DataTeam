@@ -7,12 +7,15 @@ from .api_handler import (
 )
 
 
+# creating falcon application, entry point
 api = application = falcon.API()
 
 
 # detailed view
 detail_routes = DetailedInfoResource()
 
+
+# {username} receives a token/username value for authentication
 # agency (must be a number - int)
 api.add_route('/{username}/detail/AGENCY_ID/{val}', detail_routes)
 

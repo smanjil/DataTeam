@@ -5,7 +5,6 @@ import json
 import falcon
 from falcon import testing
 import pytest
-from look.app import api
 
 
 final_api_df = pd.read_csv('input/finalapi.csv')

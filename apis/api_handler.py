@@ -5,11 +5,20 @@ import falcon
 from db.conn import engine
 
 
+# list of authorized users, further compared with {username} 
 authorized_user = ['testuser1', 'testuser2']
 
 
 class DetailedInfoResource(object):
     def on_get(self, req, resp, username, val):
+        '''
+            username: token val from url
+            val: the param value
+            if username in authorized user:
+                process request
+            else:
+                raise exception
+        '''
         if username in authorized_user:
             param = req.url.split('/')[-2]
 
@@ -29,6 +38,15 @@ class DetailedInfoResource(object):
 
 class ReportResource(object):
     def on_get(self, req, resp, username, start_year, end_year):
+        '''
+            username: token val from url
+            start_year: first param value
+            end_year: second param value
+            if username in authorized user:
+                process request
+            else:
+                raise exception
+        '''
         if username in authorized_user:
             param1 = req.url.split('/')[5]
             param2 = req.url.split('/')[7]

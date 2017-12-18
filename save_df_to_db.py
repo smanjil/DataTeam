@@ -10,6 +10,7 @@ def save_detailed_info(final_api_df):
 
 def save_summarized_info(final_api_df, *args):
     # agentwise prodlines
+    # groupby agency_id & prod_line and get count for each prod line per agency
     agentwise_prod_lines = final_api_df.groupby(args[0])['PROD_LINE'].count().to_frame(name = 'agentwise_prodlines').reset_index()
     agentwise_prod_lines.to_sql('agencywise_prod_lines', engine, if_exists = 'replace', index = False)
 
@@ -20,6 +21,7 @@ def save_summarized_info(final_api_df, *args):
 
 
 if __name__ == '__main__':
+    # read input df
     final_api_df = pd.read_csv('input/finalapi.csv')
 
     # save detailed informations
