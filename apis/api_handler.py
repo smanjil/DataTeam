@@ -10,7 +10,7 @@ class DetailedInfoResource(object):
         param = req.url.split('/')[-2]
 
         doc = pd.read_sql(
-            'select AGENCY_ID, MONTHS, PL_START_YEAR, STATE_ABBR from detailed_table where {0} = {1}' .format(param, val), engine
+            'select "AGENCY_ID", "MONTHS", "PL_START_YEAR", "STATE_ABBR" from detailed_table where {0} = {1}' .format(param, val), engine
         ).to_dict('list')
 
         # create json representation
@@ -25,7 +25,7 @@ class ReportResource(object):
         param2 = req.url.split('/')[6]
 
         doc = pd.read_sql(
-            'select AGENCY_ID, PRIMARY_AGENCY_ID, PROD_ABBR, PROD_LINE, NB_WRTN_PREM_AMT, WRTN_PREM_AMT, PREV_WRTN_PREM_AMT, PRD_ERND_PREM_AMT from detailed_table where {0} = {1} and {2} = {3}' .format(param1, start_year, param2, end_year), engine
+            'select "AGENCY_ID", "PRIMARY_AGENCY_ID", "PROD_ABBR", "PROD_LINE", "NB_WRTN_PREM_AMT", "WRTN_PREM_AMT", "PREV_WRTN_PREM_AMT", "PRD_ERND_PREM_AMT" from detailed_table where {0} = {1} and {2} = {3}' .format(param1, start_year, param2, end_year), engine
         ).to_dict('list')
         
         # create json representation
